@@ -1,4 +1,4 @@
-# ModellbasierteSoftwareEntwicklung
+# IW911 Modellbasierte Software Entwicklung
 
 Projekt zur Voresung Modellbasierte Software Entwicklung WS 2021/2022
 
