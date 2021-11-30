@@ -14,6 +14,8 @@ namespace ModellbasierteSoftwareEntwicklung.src
 			Console.WriteLine();
 			Console.WriteLine("1 : print 'Check' examples");
 			Console.WriteLine("2 : print 'Swapper' examples");
+			Console.WriteLine("3 : print 'Dictionary' examples");
+			Console.WriteLine("4 : play with your own super generic 'Dictionary'");
 			Console.WriteLine("0 : exit");
 			Console.WriteLine();
 		}
@@ -28,6 +30,12 @@ namespace ModellbasierteSoftwareEntwicklung.src
 					break;
 				case '2':
 					SwapExamples.Print();
+					break;
+				case '3':
+					DictionaryExamples.Print();
+					break;
+				case '4':
+					DictionaryPlayground.Start();
 					break;
 				default:
 					break;
