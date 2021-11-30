@@ -7,6 +7,15 @@ namespace ModellbasierteSoftwareEntwicklung.src.GenericsExamples
 		public static void Print()
 		{
 			//Check.cs examples
+			CheckInt();
+			CheckString();
+			CheckBool();
+			CheckActions();
+			Console.WriteLine("|---------------------------------|");
+		}
+
+		private static void CheckInt()
+		{
 			Console.WriteLine("|---------------------------------|");
 			Console.WriteLine("check integers:");
 			var checkInt = new Check<int>();
@@ -14,6 +23,10 @@ namespace ModellbasierteSoftwareEntwicklung.src.GenericsExamples
 			Console.WriteLine(checkInt.Compare(1, 3));
 			Console.WriteLine("2 & 2");
 			Console.WriteLine(checkInt.Compare(2, 2));
+		}
+
+		private static void CheckString()
+		{
 			Console.WriteLine("|---------------------------------|");
 			Console.WriteLine("check strings:");
 			var checkString = new Check<string>();
@@ -23,6 +36,10 @@ namespace ModellbasierteSoftwareEntwicklung.src.GenericsExamples
 			Console.WriteLine(checkString.Compare("Hi", "Hi"));
 			Console.WriteLine("hi & ho");
 			Console.WriteLine(checkString.Compare("hi", "ho"));
+		}
+
+		private static void CheckBool()
+		{
 			Console.WriteLine("|---------------------------------|");
 			Console.WriteLine("check bool:");
 			var checkBool = new Check<bool>();
@@ -32,6 +49,10 @@ namespace ModellbasierteSoftwareEntwicklung.src.GenericsExamples
 			Console.WriteLine(checkBool.Compare(true, true));
 			Console.WriteLine("false & false");
 			Console.WriteLine(checkBool.Compare(false, false));
+		}
+
+		private static void CheckActions()
+		{
 			Console.WriteLine("|---------------------------------|");
 			Console.WriteLine("check actions<int>:");
 			Check<Action<int>> check = new Check<Action<int>>();
@@ -47,7 +68,6 @@ namespace ModellbasierteSoftwareEntwicklung.src.GenericsExamples
 			Console.WriteLine(check.Compare(printAction1, i => Console.WriteLine(i)));
 			Console.WriteLine("i => Console.WriteLine(i) & i => Console.WriteLine(i)");
 			Console.WriteLine(check.Compare(i => Console.WriteLine(i), i => Console.WriteLine(i)));
-			Console.WriteLine("|---------------------------------|");
 		}
 	}
 }
