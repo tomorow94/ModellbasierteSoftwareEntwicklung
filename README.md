@@ -9,7 +9,7 @@ scka1066 - 74226
 In C# stehen Generics seit der Version 2.0 des .NET Framework zur Verfügung.
 Sie führen den Typ-Parameter T in Methoden, Klassen und Interfaces ein.
 
-Weitere allgemeine Informationen über Generics sind (hier)[https://www.codingame.com/playgrounds/2290/demystifying-c-generics] zu finden. 
+Weitere allgemeine Informationen über Generics sind [hier](https://www.codingame.com/playgrounds/2290/demystifying-c-generics) zu finden. 
 
 ## Beispiele für Generics in C#
 
