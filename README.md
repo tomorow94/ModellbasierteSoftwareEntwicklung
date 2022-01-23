@@ -13,153 +13,184 @@ Aufgabenstellung:
     3. Vergleich zu C++ templates (optional)
 
 
+# 1. Generics in C#
 
+In C# stehen Generics seit der Version 2.0 des .NET Framework zur Verfügung.
+Sie führen den Typ-Parameter T in Methoden, Klassen und Interfaces ein.
 
-## Generic Classes in C#
-    
-| Generic class | Description |
+Weitere allgemeine Informationen über Generics sind --------hier---------- zu finden. 
+
+## Beispiele für Generics in C#
+
+| Generic class             | Beschreibung |
 |---|---|
-| Collection<T>	| The basis for a generic collection Comparer compares two generic objects for equality |
-| Dictionary<TKey, TValue> | A generic collection of name/value pairs |
-| List<T> | A dynamically resizable list of Items |
-| Queue<T> | A generic implementation of a first-in, first-out (FIFO) list |
-| Stack<T> | A generic implementation of a last-in, first-out (LIFO) list |
+| Dictionary<TKey, TValue>  | Stellt eine Auflistung von Schlüsseln und Werten dar. |
+| HashSet < T > 	        | Stellt eine Menge von Werten dar. |
+| List < T >                | Stellt eine stark typisierte Liste von Objekten dar, auf die über einen Index zugegriffen werden kann. Stellt Methoden zum Durchsuchen, Sortieren und Bearbeiten von Listen bereit. |
+| Queue < T >               | Stellt eine FIFO-Auflistung (First-In-First-Out) von Objekten dar. |
+| Stack < T >               | Stellt eine LIFO (Last-In-First-Out)-Sammlung variabler Größe von Instanzen desselben angegebenen Typs dar. |
 
-- Use generic types to maximize code reuse, type safety, and performance.
-- The most common use of generics is to create collection classes. 
-- You can create your own generic interfaces, classes, methods, events and delegates.
+## Beispiel für eine Implementation bereitgestellter Generics
 
-## following text taken from [docs.microsoft generics](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics)
+Hier wird mit hilfe der oben bereits erwähnten generischen Klasse "List< T >" eine Liste erstellt, die Werte vom Typ Integer beinhaltet.
+Hierzu wird beim Aufruf der Typ-Parmeter T durch den gewünschten Type der in der Liste gehaltenen Objekte ersetzt (hier Integer).
 
-Generics introduces the concept of type parameters to .NET, which make it possible to design classes and methods that defer the specification of one or more types until the class or method is declared and instantiated by client code. For example, by using a generic type parameter T, you can write a single class that other client code can use without incurring the cost or risk of runtime casts or boxing operations, as shown here:
+Konkret wird im folgenden Code-Auszug eine integer-Liste angelegt und diese dann mit Werten gefüllt.
+Anschließend wird in der Konsole für jeden Wert in der Liste eine Zeile in der Konsole ausgegeben.
 
 ```C#
-// Declare the generic class.
-public class GenericList<T>
-{
-    public void Add(T input) { }
-}
-class TestGenericList
-{
-    private class ExampleClass { }
-    static void Main()
+    // Creating a list
+    // using List<T> class containing integer values
+    List<int> numberList = new List<int>();
+    // adding integer values to the list
+    numberList.Add(13);
+    numberList.Add(37);
+    numberList.Add(42);
+    numberList.Add(20);
+    numberList.Add(22);
+	
+    foreach (var element in numberList)
     {
-        // Declare a list of type int.
-        GenericList<int> list1 = new GenericList<int>();
-        list1.Add(1);
-
-        // Declare a list of type string.
-        GenericList<string> list2 = new GenericList<string>();
-        list2.Add("");
-
-        // Declare a list of type ExampleClass.
-        GenericList<ExampleClass> list3 = new GenericList<ExampleClass>();
-        list3.Add(new ExampleClass());
+        Console.WriteLine("list entry: value {0} - type {1}",	element, element.GetType());
     }
-}
+```
+Die Ausgabe sieht dann folgendermaßen aus:
+
+![List Example1](ListExample1.png)
+
+Mit dieser Liste kann von haus aus viel getan werden.
+Beispielsweise lässt sie sich sortieren.
+Hierzu muss die "sort()" Methode der Klasse "List" aufgerufen werden, wie im Folgenden dargestellt.
+
+```C#
+    numberList.Sort();
+    foreach (var element in numberList)
+    {
+        Console.WriteLine("list entry: value {0} - type {1}",	element, element.GetType());
+    }
 ```
 
-Generic classes and methods combine reusability, type safety, and efficiency in a way that their non-generic counterparts cannot. Generics are most frequently used with collections and the methods that operate on them. The System.Collections.Generic namespace contains several generic-based collection classes. The non-generic collections, such as ArrayList are not recommended and are maintained for compatibility purposes. For more information, see Generics in .NET.
+Die Ausgabe sieht dann folgendermaßen aus:
 
-You can also create custom generic types and methods to provide your own generalized solutions and design patterns that are type-safe and efficient. The following code example shows a simple generic linked-list class for demonstration purposes. (In most cases, you should use the List<T> class provided by .NET instead of creating your own.) The type parameter T is used in several locations where a concrete type would ordinarily be used to indicate the type of the item stored in the list. It is used in the following ways:
+![List Example2](ListExample2.png)
 
-As the type of a method parameter in the AddHead method.
-As the return type of the Data property in the nested Node class.
-As the type of the private member data in the nested class.
-T is available to the nested Node class. When GenericList<T> is instantiated with a concrete type, for example as a GenericList<int>, each occurrence of T will be replaced with int.
+Die genaue Implemetierung der Generischen Klasse "List< T >" ist [hier](https://referencesource.microsoft.com/#mscorlib/system/collections/generic/list.cs,cf7f4095e4de7646) zu finden.
+
+## Beispiel eigene Generische Klasse in C#
+Natürlich besteht auch die Möglichkeit eigene generische Klassen oder Methoden zu schreiben.
+
+### Check< T >
+Als erstes Beispiel hier die recht einfache Klasse "Check< T >", welche zwei Werte eines Typs entgegen nimmt und miteinander vergleicht.
+
+Sind beide Werte gleich und nicht "null", wird "true" zurückgegeben, ansonsten "false".
 
 ```C#
-// type parameter T in angle brackets
-public class GenericList<T>
+class Check<T>
 {
-    // The nested class is also generic on T.
-    private class Node
+    public bool Compare(T a, T b)
     {
-        // T used in non-generic constructor.
-        public Node(T t)
+        if (a != null && b!= null && a.Equals(b))
         {
-            next = null;
-            data = t;
+            return true;
         }
-
-        private Node next;
-        public Node Next
+        else
         {
-            get { return next; }
-            set { next = value; }
-        }
-
-        // T as private member data type.
-        private T data;
-
-        // T as return type of property.
-        public T Data
-        {
-            get { return data; }
-            set { data = value; }
-        }
-    }
-
-    private Node head;
-
-    // constructor
-    public GenericList()
-    {
-        head = null;
-    }
-
-    // T as method parameter type:
-    public void AddHead(T t)
-    {
-        Node n = new Node(t);
-        n.Next = head;
-        head = n;
-    }
-
-    public IEnumerator<T> GetEnumerator()
-    {
-        Node current = head;
-
-        while (current != null)
-        {
-            yield return current.Data;
-            current = current.Next;
+            return false;
         }
     }
 }
 ```
 
-The following code example shows how client code uses the generic GenericList<T> class to create a list of integers. Simply by changing the type argument, the following code could easily be modified to create lists of strings or any other custom type:
+Der folgende Code initialisiert die Klassse "Check< T >", so dass Integer Werte vergleichen werden können.
+Anschließend werden die Werte "1" und "3" mit einander vergeichen und das Ergebnis in "result" gespeichert.
 
 ```C#
-class TestGenericList
+    var checkInt = new Check<int>();
+    bool result = checkInt.Compare(1, 3);
+```
+Hier die implementierung zusammen mit Etwas Code zur visuellen Darstellung der Ein und Ausgabe in der Kommandozeile: 
+```C#
+    Console.WriteLine("check integers:");
+    var checkInt = new Check<int>();
+    Console.WriteLine("1 & 3");
+    Console.WriteLine(checkInt.Compare(1, 3));
+    Console.WriteLine("2 & 2");
+    Console.WriteLine(checkInt.Compare(2, 2));
+```
+Die vom obigen Code generierte Ausgabe siet dann aus wie folgt:
+
+![Check Example](CheckExample.png)
+
+### Swapper
+
+Als zweites Beispiel dient hier eine statische Klasse, deren generische Methode "SwapIt" zwei Werte entgegen nimmt und vertauscht.
+
+```C#
+static class Swapper
 {
-    static void Main()
+    internal static void SwapIt<T>(ref T a, ref T b)
     {
-        // int is the type argument
-        GenericList<int> list = new GenericList<int>();
-
-        for (int x = 0; x < 10; x++)
-        {
-            list.AddHead(x);
-        }
-
-        foreach (int i in list)
-        {
-            System.Console.Write(i + " ");
-        }
-        System.Console.WriteLine("\nDone");
+        T temp;
+        temp = a;
+        a = b;
+        b = temp;
     }
 }
 ```
 
-### Generics overview
+Bei der Methode "SwapIt" ist es nicht nötig den Typ zu spezifizieren.
 
-- Use generic types to maximize code reuse, type safety, and performance.
-- The most common use of generics is to create collection classes.
-- The .NET class library contains several generic collection classes in the System.Collections.Generic namespace. The generic collections should be used whenever possible instead of classes such as ArrayList in the System.Collections namespace.
-- You can create your own generic interfaces, classes, methods, events, and delegates.
-- Generic classes may be constrained to enable access to methods on particular data types.
-- Information on the types that are used in a generic data type may be obtained at run-time by using reflection.
+Die referenz der Variable oder des Objekts wird übergeben und vertauscht.
 
-[system.collections.generic](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-6.0)
+Eine Mögliche Implementierung mit Kommandozeilenausgabe ist im folgenden Code-Ausschnitt zu sehen:
+
+```C#
+    string a = "Hi";
+    string b = "hi";
+    Console.WriteLine("Before swap: {0}, {1}", a, b);
+    Swapper.SwapIt(ref a, ref b);
+    Console.WriteLine("After swap: {0}, {1}", a, b);
+```
+Die Ausgabe sieht bei Ausführung dann folgendermaßen aus:
+
+![Swapper Example](SwapperExample.png)
+
+Weitere Beispiele zur implementierung von bereits gebenen oder eigens erstellten Generics sind der Codebasis zu entnehmen.
+Die Ausgabe kann bei Ausführen des Projekts in der Kommandozeile betrachtet werden.
+Zur Auswahl der einzelnen Beispiele wird ein simples Menü genutzt.
+
+### Hinweis
+
+Es ist nicht nötig sich an den Buchstaben T zu halten.
+
+Der Buchstabe T hat sich nur zur konvention geworden, da er für das Wort "Type" steht.
+
+Es kann jeder buchstabe an Stelle von T genutzt werden.
+
+Auch mehrere Parameter können Spezifiziert werden, werden sie durch Komma getrennt (z.B. <T, K, P, L>) und können dann als Parameter an der gewünschten Stelle genutzt werden.
+
+# Vorteile von Generics
+Durch das Verwenden von Generics wird Code wiederverwendbar, typsicher und hat eine bessere Performance zur Laufzeit, da, wenn korrekt verwendet, keine Kosten für Type Casten oder Boxing/Unboxing anfallen, was zur Folge hat, dass keine Typumwandlungsfehler zur Laufzeit Produziert werden. Der Compiler von C# kann Probleme mit ungültigem Casting zur Kompilierzeit erkennen.
+
+## Wiederverwendbarkeit
+Wiederverwendbarkeit bei Generics in C# meint, dass es möglich ist, eine Methode oder Klasse zu erstellen, die mit unterschiedlichen Typen an unterschiedlichen Stellen verwendet werden kann.
+
+Mit Generics schreibt man so statt vieler Methoden die die selbe Funktion haben, nur eine Methode, welche einen Parameter des Typs T akzeptiert. In dieser wird dann die zuvor erwähnte Funktion implementiert, welche dann als Rückgabe "void", also nichts, oder einen konkreten Typen (String, int, bool, ...) oder sogar T hat.
+
+## Typsicherheit & Performance
+Da der Compiler von C# bereits beim compailieren Fehler aus gibt, sollte ein Problem mit unsicheren Casts bestehen, und den Prozess der Compailierung abbricht, wird während der Laufzeit kein solcher Fehler auftreten und das Programm verlangsmen oder durch Fehler abstürzen lassen.
+
+## Boxing / Unboxing
+
+- Boxing bezeichnet den Prozess, einen Typ zu einem Objekt zu konvertieren.
+- Unboxing bezeichnet den Prozess, ein Objekt zu einem Typ zu konvertieren.
+
+Boxing und Unboxing sind Rechenintensive Operationen, die es zu vermeiden gilt, soll der Code performant sein.
+Durch Verwendung von Generics wird das Boxing und Unboxing umgangen, da im Code mit dem Parametertyp T gearbeitet wird, für den der Compiler beim Compailieren mit dem konkreten Typ ersetzt, sodass der Boxing-Vorgang nicht zur Laufzeit durchgeführt werden muss.
+
+# Quellen
+- [codingame - demystifying c# generics](https://www.codingame.com/playgrounds/2290/demystifying-c-generics)
+- [system.collections.generic](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-6.0)
+- [Generische Typparameter](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/generics/generic-type-parameters)
+- [referencesource.microsoft](https://referencesource.microsoft.com)
+- [tutorialsteacher](https://www.tutorialsteacher.com/csharp/csharp-generics)
