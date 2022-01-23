@@ -47,7 +47,7 @@ Anschließend wird in der Konsole für jeden Wert in der Liste eine Zeile in der
 ```
 Die Ausgabe sieht dann folgendermaßen aus:
 
-![List Example1](ListExample1.png)
+![List Example1](img/ListExample1.png)
 
 Mit dieser Liste kann von haus aus viel getan werden.
 Beispielsweise lässt sie sich sortieren.
@@ -63,7 +63,7 @@ Hierzu muss die "sort()" Methode der Klasse "List" aufgerufen werden, wie im Fol
 
 Die Ausgabe sieht dann folgendermaßen aus:
 
-![List Example2](ListExample2.png)
+![List Example2](img/ListExample2.png)
 
 Die genaue Implemetierung der Generischen Klasse "List< T >" ist [hier](https://referencesource.microsoft.com/#mscorlib/system/collections/generic/list.cs,cf7f4095e4de7646) zu finden.
 
@@ -110,7 +110,7 @@ Hier die implementierung zusammen mit Etwas Code zur visuellen Darstellung der E
 ```
 Die vom obigen Code generierte Ausgabe siet dann aus wie folgt:
 
-![Check Example](CheckExample.png)
+![Check Example](img/CheckExample.png)
 
 ### Swapper
 
@@ -144,7 +144,7 @@ Eine Mögliche Implementierung mit Kommandozeilenausgabe ist im folgenden Code-A
 ```
 Die Ausgabe sieht bei Ausführung dann folgendermaßen aus:
 
-![Swapper Example](SwapperExample.png)
+![Swapper Example](img/SwapperExample.png)
 
 Weitere Beispiele zur implementierung von bereits gebenen oder eigens erstellten Generics sind der Codebasis zu entnehmen.
 Die Ausgabe kann bei Ausführen des Projekts in der Kommandozeile betrachtet werden.
