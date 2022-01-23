@@ -67,6 +67,8 @@ Die Ausgabe sieht dann folgendermaßen aus:
 
 Die genaue Implemetierung der Generischen Klasse "List< T >" ist [hier](https://referencesource.microsoft.com/#mscorlib/system/collections/generic/list.cs,cf7f4095e4de7646) zu finden.
 
+Die Implementierung in diesem Projekt ist [hier](src/GenericsExamples/ListExamples.cs) zu finden.
+
 ## Beispiel eigene Generische Klasse in C#
 Natürlich besteht auch die Möglichkeit eigene generische Klassen oder Methoden zu schreiben.
 
@@ -112,6 +114,10 @@ Die vom obigen Code generierte Ausgabe siet dann aus wie folgt:
 
 ![Check Example](img/CheckExample.png)
 
+Der Code der Check Klasse in diesem Projekt ist [hier](src/GenericsExamples/ExampleClasses/Check.cs) zu finden.
+
+Die Implementierung der Beispiele zur Check Klasse sind [hier](src/GenericsExamples/CheckExamples.cs ) zu finden.
+
 ### Swapper
 
 Als zweites Beispiel dient hier eine statische Klasse, deren generische Methode "SwapIt" zwei Werte entgegen nimmt und vertauscht.
@@ -146,9 +152,13 @@ Die Ausgabe sieht bei Ausführung dann folgendermaßen aus:
 
 ![Swapper Example](img/SwapperExample.png)
 
-Weitere Beispiele zur implementierung von bereits gebenen oder eigens erstellten Generics sind der Codebasis zu entnehmen.
-Die Ausgabe kann bei Ausführen des Projekts in der Kommandozeile betrachtet werden.
-Zur Auswahl der einzelnen Beispiele wird ein simples Menü genutzt.
+Der Code der Swapper Klasse in diesem Projekt ist [hier](src/GenericsExamples/ExampleClasses/Swap.cs) zu finden.
+
+Die Implementierung der Beispiele zur Swapper Klasse sind [hier](src/GenericsExamples/SwapExamples.cs ) zu finden.
+
+Weitere Beispiele zur Implementierung von bereits gebenen oder eigens erstellten Generics sind der Codebasis zu entnehmen.
+Die Ausgabe kann bei Ausführen des [Projekts](src/Program.cs) in der Kommandozeile betrachtet werden.
+Zur Auswahl der einzelnen Beispiele wird ein simples [Menü](src/Menu.cs) genutzt.
 
 ### Hinweis
 
