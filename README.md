@@ -13,30 +13,30 @@ Aufgabenstellung:
     3. Vergleich zu C++ templates (optional)
 
 
-# 1. Generics in C#
+# Generics in C#
 
-In C# stehen Generics seit der Version 2.0 des .NET Framework zur Verfügung.
-Sie führen den Typ-Parameter T in Methoden, Klassen und Interfaces ein.
+In C# stehen Generics seit der Version 2.0 des .NET Framework zur VerfÃ¼gung.
+Sie fÃ¼hren den Typ-Parameter T in Methoden, Klassen und Interfaces ein.
 
-Weitere allgemeine Informationen über Generics sind --------hier---------- zu finden. 
+Weitere allgemeine Informationen Ã¼ber Generics sind --------hier---------- zu finden. 
 
-## Beispiele für Generics in C#
+## Beispiele fÃ¼r Generics in C#
 
 | Generic class             | Beschreibung |
 |---|---|
-| Dictionary<TKey, TValue>  | Stellt eine Auflistung von Schlüsseln und Werten dar. |
+| Dictionary<TKey, TValue>  | Stellt eine Auflistung von SchlÃ¼sseln und Werten dar. |
 | HashSet < T > 	        | Stellt eine Menge von Werten dar. |
-| List < T >                | Stellt eine stark typisierte Liste von Objekten dar, auf die über einen Index zugegriffen werden kann. Stellt Methoden zum Durchsuchen, Sortieren und Bearbeiten von Listen bereit. |
+| List < T >                | Stellt eine stark typisierte Liste von Objekten dar, auf die Ã¼ber einen Index zugegriffen werden kann. Stellt Methoden zum Durchsuchen, Sortieren und Bearbeiten von Listen bereit. |
 | Queue < T >               | Stellt eine FIFO-Auflistung (First-In-First-Out) von Objekten dar. |
-| Stack < T >               | Stellt eine LIFO (Last-In-First-Out)-Sammlung variabler Größe von Instanzen desselben angegebenen Typs dar. |
+| Stack < T >               | Stellt eine LIFO (Last-In-First-Out)-Sammlung variabler GrÃ¶ÃŸe von Instanzen desselben angegebenen Typs dar. |
 
-## Beispiel für eine Implementation bereitgestellter Generics
+## Beispiel fÃ¼r eine Implementation bereitgestellter Generics
 
-Hier wird mit hilfe der oben bereits erwähnten generischen Klasse "List< T >" eine Liste erstellt, die Werte vom Typ Integer beinhaltet.
-Hierzu wird beim Aufruf der Typ-Parmeter T durch den gewünschten Type der in der Liste gehaltenen Objekte ersetzt (hier Integer).
+Hier wird mit hilfe der oben bereits erwÃ¤hnten generischen Klasse "List< T >" eine Liste erstellt, die Werte vom Typ Integer beinhaltet.
+Hierzu wird beim Aufruf der Typ-Parmeter T durch den gewÃ¼nschten Type der in der Liste gehaltenen Objekte ersetzt (hier Integer).
 
-Konkret wird im folgenden Code-Auszug eine integer-Liste angelegt und diese dann mit Werten gefüllt.
-Anschließend wird in der Konsole für jeden Wert in der Liste eine Zeile in der Konsole ausgegeben.
+Konkret wird im folgenden Code-Auszug eine integer-Liste angelegt und diese dann mit Werten gefÃ¼llt.
+AnschlieÃŸend wird in der Konsole fÃ¼r jeden Wert in der Liste eine Zeile in der Konsole ausgegeben.
 
 ```C#
     // Creating a list
@@ -54,12 +54,12 @@ Anschließend wird in der Konsole für jeden Wert in der Liste eine Zeile in der K
         Console.WriteLine("list entry: value {0} - type {1}",	element, element.GetType());
     }
 ```
-Die Ausgabe sieht dann folgendermaßen aus:
+Die Ausgabe sieht dann folgendermaÃŸen aus:
 
 ![List Example1](ListExample1.png)
 
 Mit dieser Liste kann von haus aus viel getan werden.
-Beispielsweise lässt sie sich sortieren.
+Beispielsweise lÃ¤sst sie sich sortieren.
 Hierzu muss die "sort()" Methode der Klasse "List" aufgerufen werden, wie im Folgenden dargestellt.
 
 ```C#
@@ -70,19 +70,19 @@ Hierzu muss die "sort()" Methode der Klasse "List" aufgerufen werden, wie im Fol
     }
 ```
 
-Die Ausgabe sieht dann folgendermaßen aus:
+Die Ausgabe sieht dann folgendermaÃŸen aus:
 
 ![List Example2](ListExample2.png)
 
 Die genaue Implemetierung der Generischen Klasse "List< T >" ist [hier](https://referencesource.microsoft.com/#mscorlib/system/collections/generic/list.cs,cf7f4095e4de7646) zu finden.
 
 ## Beispiel eigene Generische Klasse in C#
-Natürlich besteht auch die Möglichkeit eigene generische Klassen oder Methoden zu schreiben.
+NatÃ¼rlich besteht auch die MÃ¶glichkeit eigene generische Klassen oder Methoden zu schreiben.
 
 ### Check< T >
 Als erstes Beispiel hier die recht einfache Klasse "Check< T >", welche zwei Werte eines Typs entgegen nimmt und miteinander vergleicht.
 
-Sind beide Werte gleich und nicht "null", wird "true" zurückgegeben, ansonsten "false".
+Sind beide Werte gleich und nicht "null", wird "true" zurÃ¼ckgegeben, ansonsten "false".
 
 ```C#
 class Check<T>
@@ -101,8 +101,8 @@ class Check<T>
 }
 ```
 
-Der folgende Code initialisiert die Klassse "Check< T >", so dass Integer Werte vergleichen werden können.
-Anschließend werden die Werte "1" und "3" mit einander vergeichen und das Ergebnis in "result" gespeichert.
+Der folgende Code initialisiert die Klassse "Check< T >", so dass Integer Werte vergleichen werden kÃ¶nnen.
+AnschlieÃŸend werden die Werte "1" und "3" mit einander vergeichen und das Ergebnis in "result" gespeichert.
 
 ```C#
     var checkInt = new Check<int>();
@@ -138,11 +138,11 @@ static class Swapper
 }
 ```
 
-Bei der Methode "SwapIt" ist es nicht nötig den Typ zu spezifizieren.
+Bei der Methode "SwapIt" ist es nicht nÃ¶tig den Typ zu spezifizieren.
 
-Die referenz der Variable oder des Objekts wird übergeben und vertauscht.
+Die referenz der Variable oder des Objekts wird Ã¼bergeben und vertauscht.
 
-Eine Mögliche Implementierung mit Kommandozeilenausgabe ist im folgenden Code-Ausschnitt zu sehen:
+Eine MÃ¶gliche Implementierung mit Kommandozeilenausgabe ist im folgenden Code-Ausschnitt zu sehen:
 
 ```C#
     string a = "Hi";
@@ -151,34 +151,34 @@ Eine Mögliche Implementierung mit Kommandozeilenausgabe ist im folgenden Code-Au
     Swapper.SwapIt(ref a, ref b);
     Console.WriteLine("After swap: {0}, {1}", a, b);
 ```
-Die Ausgabe sieht bei Ausführung dann folgendermaßen aus:
+Die Ausgabe sieht bei AusfÃ¼hrung dann folgendermaÃŸen aus:
 
 ![Swapper Example](SwapperExample.png)
 
 Weitere Beispiele zur implementierung von bereits gebenen oder eigens erstellten Generics sind der Codebasis zu entnehmen.
-Die Ausgabe kann bei Ausführen des Projekts in der Kommandozeile betrachtet werden.
-Zur Auswahl der einzelnen Beispiele wird ein simples Menü genutzt.
+Die Ausgabe kann bei AusfÃ¼hren des Projekts in der Kommandozeile betrachtet werden.
+Zur Auswahl der einzelnen Beispiele wird ein simples MenÃ¼ genutzt.
 
 ### Hinweis
 
-Es ist nicht nötig sich an den Buchstaben T zu halten.
+Es ist nicht nÃ¶tig sich an den Buchstaben T zu halten.
 
-Der Buchstabe T hat sich nur zur konvention geworden, da er für das Wort "Type" steht.
+Der Buchstabe T hat sich nur zur konvention geworden, da er fÃ¼r das Wort "Type" steht.
 
 Es kann jeder buchstabe an Stelle von T genutzt werden.
 
-Auch mehrere Parameter können Spezifiziert werden, werden sie durch Komma getrennt (z.B. <T, K, P, L>) und können dann als Parameter an der gewünschten Stelle genutzt werden.
+Auch mehrere Parameter kÃ¶nnen Spezifiziert werden, werden sie durch Komma getrennt (z.B. <T, K, P, L>) und kÃ¶nnen dann als Parameter an der gewÃ¼nschten Stelle genutzt werden.
 
 # Vorteile von Generics
-Durch das Verwenden von Generics wird Code wiederverwendbar, typsicher und hat eine bessere Performance zur Laufzeit, da, wenn korrekt verwendet, keine Kosten für Type Casten oder Boxing/Unboxing anfallen, was zur Folge hat, dass keine Typumwandlungsfehler zur Laufzeit Produziert werden. Der Compiler von C# kann Probleme mit ungültigem Casting zur Kompilierzeit erkennen.
+Durch das Verwenden von Generics wird Code wiederverwendbar, typsicher und hat eine bessere Performance zur Laufzeit, da, wenn korrekt verwendet, keine Kosten fÃ¼r Type Casten oder Boxing/Unboxing anfallen, was zur Folge hat, dass keine Typumwandlungsfehler zur Laufzeit Produziert werden. Der Compiler von C# kann Probleme mit ungÃ¼ltigem Casting zur Kompilierzeit erkennen.
 
 ## Wiederverwendbarkeit
-Wiederverwendbarkeit bei Generics in C# meint, dass es möglich ist, eine Methode oder Klasse zu erstellen, die mit unterschiedlichen Typen an unterschiedlichen Stellen verwendet werden kann.
+Wiederverwendbarkeit bei Generics in C# meint, dass es mÃ¶glich ist, eine Methode oder Klasse zu erstellen, die mit unterschiedlichen Typen an unterschiedlichen Stellen verwendet werden kann.
 
-Mit Generics schreibt man so statt vieler Methoden die die selbe Funktion haben, nur eine Methode, welche einen Parameter des Typs T akzeptiert. In dieser wird dann die zuvor erwähnte Funktion implementiert, welche dann als Rückgabe "void", also nichts, oder einen konkreten Typen (String, int, bool, ...) oder sogar T hat.
+Mit Generics schreibt man so statt vieler Methoden die die selbe Funktion haben, nur eine Methode, welche einen Parameter des Typs T akzeptiert. In dieser wird dann die zuvor erwÃ¤hnte Funktion implementiert, welche dann als RÃ¼ckgabe "void", also nichts, oder einen konkreten Typen (String, int, bool, ...) oder sogar T hat.
 
 ## Typsicherheit & Performance
-Da der Compiler von C# bereits beim compailieren Fehler aus gibt, sollte ein Problem mit unsicheren Casts bestehen, und den Prozess der Compailierung abbricht, wird während der Laufzeit kein solcher Fehler auftreten und das Programm verlangsmen oder durch Fehler abstürzen lassen.
+Da der Compiler von C# bereits beim compailieren Fehler aus gibt, sollte ein Problem mit unsicheren Casts bestehen, und den Prozess der Compailierung abbricht, wird wÃ¤hrend der Laufzeit kein solcher Fehler auftreten und das Programm verlangsmen oder durch Fehler abstÃ¼rzen lassen.
 
 ## Boxing / Unboxing
 
@@ -186,7 +186,7 @@ Da der Compiler von C# bereits beim compailieren Fehler aus gibt, sollte ein Pro
 - Unboxing bezeichnet den Prozess, ein Objekt zu einem Typ zu konvertieren.
 
 Boxing und Unboxing sind Rechenintensive Operationen, die es zu vermeiden gilt, soll der Code performant sein.
-Durch Verwendung von Generics wird das Boxing und Unboxing umgangen, da im Code mit dem Parametertyp T gearbeitet wird, für den der Compiler beim Compailieren mit dem konkreten Typ ersetzt, sodass der Boxing-Vorgang nicht zur Laufzeit durchgeführt werden muss.
+Durch Verwendung von Generics wird das Boxing und Unboxing umgangen, da im Code mit dem Parametertyp T gearbeitet wird, fÃ¼r den der Compiler beim Compailieren mit dem konkreten Typ ersetzt, sodass der Boxing-Vorgang nicht zur Laufzeit durchgefÃ¼hrt werden muss.
 
 # Quellen
 - [codingame - demystifying c# generics](https://www.codingame.com/playgrounds/2290/demystifying-c-generics)
