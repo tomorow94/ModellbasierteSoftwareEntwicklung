@@ -1,4 +1,5 @@
 ﻿using ModellbasierteSoftwareEntwicklung.GenericsExamples;
+using ModellbasierteSoftwareEntwicklung.src.GenericsExamples.ExampleClasses;
 
 namespace ModellbasierteSoftwareEntwicklung.src.GenericsExamples
 {
@@ -11,6 +12,8 @@ namespace ModellbasierteSoftwareEntwicklung.src.GenericsExamples
 			CheckString();
 			CheckBool();
 			CheckActions();
+			CheckLists();
+			CheckMyEmptyClass();
 			Console.WriteLine("|---------------------------------|");
 		}
 
@@ -68,6 +71,73 @@ namespace ModellbasierteSoftwareEntwicklung.src.GenericsExamples
 			Console.WriteLine(check.Compare(printAction1, i => Console.WriteLine(i)));
 			Console.WriteLine("i => Console.WriteLine(i) & i => Console.WriteLine(i)");
 			Console.WriteLine(check.Compare(i => Console.WriteLine(i), i => Console.WriteLine(i)));
+		}
+
+		private static void CheckLists()
+		{
+			Console.WriteLine("|---------------------------------|");
+			Console.WriteLine("|Check Lists Preparation Info|");
+			Console.WriteLine("|---------------------------------|");
+			Console.WriteLine("List<int>:");
+			// Creating a list
+			// using List<T> class containing integer values
+			List<int> numberList = new List<int>();
+			// adding integer values to the list
+			numberList.Add(13);
+			numberList.Add(37);
+			numberList.Add(42);
+			numberList.Add(20);
+			numberList.Add(22);
+			
+			foreach (var element in numberList)
+			{
+				Console.WriteLine("list entry: value {0} - type {1}",
+					element, element.GetType());
+			}
+
+			Console.WriteLine("|---------------------------------|");
+			Console.WriteLine("List<int> (sorted):");
+			var numberListSorted = numberList;
+			numberListSorted.Sort();
+			foreach (var element in numberListSorted)
+			{
+				Console.WriteLine("list entry: value {0} - type {1}",
+					element, element.GetType());
+			}
+			
+			Console.WriteLine("|---------------------------------|");
+			Console.WriteLine("check Lists:");
+			var check = new Check<List<int>>();
+			Console.WriteLine("List<int> & List>int>");
+			Console.WriteLine(check.Compare(numberList, numberList));
+			Console.WriteLine("List<int>1 & List<int> (sorted)");
+			Console.WriteLine(check.Compare(numberList, numberListSorted));
+			Console.WriteLine("List<int> (sorted) & List<int> (sorted)");
+			Console.WriteLine(check.Compare(numberListSorted, numberListSorted));
+		}
+
+		private static void CheckMyEmptyClass()
+		{
+			Console.WriteLine("|---------------------------------|");
+			Console.WriteLine("check MyEmptyClass:");
+			var check = new Check<MyEmptyClass>();
+			Console.WriteLine("MyEmptyClass has no special functionality");
+			Console.WriteLine(" - Code of MyEmptyClass - ");
+			Console.WriteLine("internal class MyEmptyClass");
+			Console.WriteLine("{");
+			Console.WriteLine("}");
+			Console.WriteLine(" - Declaration of variables - ");
+			Console.WriteLine("var class1 = new MyEmptyClass();");
+			Console.WriteLine("var class2 = new MyEmptyClass();");
+			var class1 = new MyEmptyClass();
+			var class2 = new MyEmptyClass();
+			Console.WriteLine(" - the checks - ");
+			Console.WriteLine("class1 & class1");
+			Console.WriteLine(check.Compare(class1, class1));
+			Console.WriteLine("class1 & class2");
+			Console.WriteLine(check.Compare(class1, class2));
+			Console.WriteLine("class2 & class2");
+			Console.WriteLine(check.Compare(class2, class2));
 		}
 	}
 }

@@ -72,7 +72,7 @@ Die Implementierung in diesem Projekt ist [hier](src/GenericsExamples/ListExampl
 ## Beispiel eigene Generische Klasse in C#
 Natürlich besteht auch die Möglichkeit eigene generische Klassen oder Methoden zu schreiben.
 
-### Check< T >
+### Beispiel 1: Check< T >
 Als erstes Beispiel hier die recht einfache Klasse "Check< T >", welche zwei Werte eines Typs entgegen nimmt und miteinander vergleicht.
 
 Sind beide Werte gleich und nicht "null", wird "true" zurückgegeben, ansonsten "false".
@@ -94,7 +94,7 @@ class Check<T>
 }
 ```
 
-Der folgende Code initialisiert die Klassse "Check< T >", so dass Integer Werte vergleichen werden können.
+Der folgende Code initialisiert die Klassse "Check< T >", so dass Integer Werte verglichen werden können.
 Anschließend werden die Werte "1" und "3" mit einander vergeichen und das Ergebnis in "result" gespeichert.
 
 ```C#
@@ -118,7 +118,7 @@ Der Code der Check Klasse in diesem Projekt ist [hier](src/GenericsExamples/Exam
 
 Die Implementierung der Beispiele zur Check Klasse sind [hier](src/GenericsExamples/CheckExamples.cs ) zu finden.
 
-### Swapper
+### Beispiel 2: Swapper
 
 Als zweites Beispiel dient hier eine statische Klasse, deren generische Methode "SwapIt" zwei Werte entgegen nimmt und vertauscht.
 
@@ -160,6 +160,63 @@ Weitere Beispiele zur Implementierung von bereits gebenen oder eigens erstellten
 Die Ausgabe kann bei Ausführen des [Projekts](src/Program.cs) in der Kommandozeile betrachtet werden.
 Zur Auswahl der einzelnen Beispiele wird ein simples [Menü](src/Menu.cs) genutzt.
 
+## Einschränkung von erlaubten Typparametern
+Bei einer Klassendeklaration wie im "Beispiel 1: Check< T >" beschrieben, das T für alle beliebeigen Typen.
+Diese können eingeschränkt werden, indem hinter der Klassenbezeichnung ein "where T : < Bedingung hier einfügen >" gesetzt wird.
+Da in der Klasse "Check< T >" die Vergleichsmethode ".Equals()" verwendet wird, wäre hier eine Einschränkung der Typen, für die T stehen darf, angebracht, damit nur solche verwendet werden können, die besagte Methode implementiert haben.
+
+Dies würde dann wie folgt aussehen:
+
+```C#
+    internal class Check<T> where T : IComparable
+    {
+        public bool Compare(T a, T b)
+        {
+            if (a != null && b!= null && a.Equals(b))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+```
+In dieser Klasse "Check< T >" werden nur noch Typen für T zugelassen, die das Interface IComaparable implementiert haben.
+
+In diesem speziellen Fall ist dies jedoch gar nicht nötig.
+Jedes Objekt in C# hat standartmäßig einige grundlegende Verhaltensweisen eingebaut.
+Hierzu gehört die standardmäßige Umsetzung von ".Eqauls()" als Referenzvergleich, wenn nicht explizit implementiert.
+
+Diese Ausnahme erlaubt es auch eine eigene Klasse als Typ zu übergeben, ohne fehler zu verursachen, auch wenn diese komplett leer ist.
+Beispiel einer leeren neuen Klasse ohne eigen implementiertes .Eqals().
+```C#
+    internal class MyEmptyClass
+    {
+    }
+```
+
+Die Implementierung der Vergleiche mit konsolenausgabe könnte wie folg aussehen:
+
+```C#
+    var check = new Check<MyEmptyClass>();
+    var class1 = new MyEmptyClass();
+    var class2 = new MyEmptyClass();
+    Console.WriteLine("class1 & class1");
+    Console.WriteLine(check.Compare(class1, class1));
+    Console.WriteLine("class1 & class2");
+    Console.WriteLine(check.Compare(class1, class2));
+    Console.WriteLine("class2 & class2");
+    Console.WriteLine(check.Compare(class2, class2));
+```
+
+Wie in der, durch den obigen Code erzeugten, Ausgabe (unten stehende Abbildung) zu sehen ist, funktioniert die Vergleichsfunktionalität zuverlässig, obwohl in der Klasse "MyEmptyClass" keine Methode ".Eqals()" explizit implementiert wurde.
+
+![Check Example2](img/CheckExample2.png)
+
+Weitere informationen zu Einschränkungen für Typparameter in C# finden sich [hier](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters).
+
 ### Hinweis
 
 Es ist nicht nötig sich an den Buchstaben T zu halten.
@@ -193,5 +250,6 @@ Durch Verwendung von Generics wird das Boxing und Unboxing umgangen, da im Code 
 - [codingame - demystifying c# generics](https://www.codingame.com/playgrounds/2290/demystifying-c-generics)
 - [system.collections.generic](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-6.0)
 - [Generische Typparameter](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/generics/generic-type-parameters)
+- [Eingescränkte Typparameter](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters)
 - [referencesource.microsoft](https://referencesource.microsoft.com)
 - [tutorialsteacher](https://www.tutorialsteacher.com/csharp/csharp-generics)

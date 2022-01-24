@@ -1,6 +1,6 @@
 ﻿namespace ModellbasierteSoftwareEntwicklung.GenericsExamples
 {
-	internal class Check<T>
+	internal class Check<T>// where T : IComparable
 	{
 		public bool Compare(T a, T b)
 		{
